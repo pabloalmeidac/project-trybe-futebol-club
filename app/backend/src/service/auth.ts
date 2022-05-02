@@ -3,6 +3,7 @@ import { UserModel } from '../model/User';
 import { ILogin } from '../interfaces';
 import { readFileSync } from 'fs';
 import { IUser } from '../interfaces/login';
+import * as bcrypt  from 'bcrypt';
 
 
 export default class AuthService {
@@ -17,8 +18,8 @@ export default class AuthService {
   async genToken(payload: ILogin) {
     const user = await this.userModel.findUser(payload.email)
     
-    if (!user || user.password !== payload.password) return null;
-    
+    if (!user || !(await bcrypt.compare(user.password, payload.password))) return null;
+
     let { id, username, role, email } = user;
 
     const userData: IUser = { id, username, role, email };
