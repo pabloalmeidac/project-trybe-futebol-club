@@ -1,15 +1,15 @@
 import * as express from 'express';
+import { loginRouter } from './router';
 
 class App {
   public app: express.Express;
-  // ...
 
   constructor() {
-    // ...
+    this.app = express();
     this.config();
-    // ...
+    this.routes();
   }
-
+  
   private config():void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
@@ -19,13 +19,17 @@ class App {
     };
 
     this.app.use(accessControl);
-    // ...
+    this.app.use(express.json());
   }
 
-  // ...
-  public start(PORT: string | number):void {
-    // ...
+  private routes() {
+    this.app.use('/login', loginRouter);
   }
+
+  public start(PORT: string | number):void {
+    this.app.listen(PORT, () => console.warn(`Listening on ${PORT}`));
+  }
+  
 }
 
 export { App };

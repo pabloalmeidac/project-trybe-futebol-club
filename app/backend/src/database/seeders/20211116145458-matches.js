@@ -1,10 +1,5 @@
 module.exports = {
   up: async (queryInterface) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     */
     await queryInterface.bulkInsert(
       'matches',
       [
@@ -350,11 +345,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     */
     await queryInterface.bulkDelete('matches', null, {});
   },
 };

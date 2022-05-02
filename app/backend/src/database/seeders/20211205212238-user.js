@@ -1,10 +1,5 @@
 module.exports = {
   up: async (queryInterface) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     */
     await queryInterface.bulkInsert('users', [
       {
         username: 'Admin',
@@ -18,15 +13,16 @@ module.exports = {
         email: 'user@user.com',
         password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO', // secret_user
       },
+      {
+        username: 'teste',
+        role: 'testeteste',
+        email: 'teste@teste.com',
+        password: 'testeteste',
+      },
     ], {});
   },
 
   down: async (queryInterface) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     */
     await queryInterface.bulkDelete('users', null, {});
   },
 };
