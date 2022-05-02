@@ -11,7 +11,7 @@ export default class AuthService {
 
   constructor(private userModel: UserModel) {
     this._SECRET = readFileSync('./jwt.evaluation.key', 'utf-8');
-    this._jwtConfig = { expiresIn: `7`, algorithm: `HS256` };
+    this._jwtConfig = { expiresIn: `7d`, algorithm: `HS256` };
   }
 
   async genToken(payload: ILogin) {
@@ -27,12 +27,14 @@ export default class AuthService {
     return { user: userData, token };
   }
 
-  verifyToken(token: string): boolean {
+  verifyToken(token: string) {
     try {
-      jwt.verify(token, this._SECRET);
-    } catch (error) {
-      return false;
+      const decoded = jwt.verify(token, this._SECRET);
+      return decoded;
+    } catch (error: any) {
+      if (error.name.includes('Token')) {
+        return false;
+      }
     }
-    return true;
   }
 }

@@ -1,4 +1,3 @@
-import { IUser } from '../interfaces/login';
 import Users from '../database/models/Users';
 
 export class UserModel {
