@@ -3,7 +3,7 @@ import { UserModel } from '../model/User';
 import { ILogin } from '../interfaces';
 import { readFileSync } from 'fs';
 import { IUser } from '../interfaces/login';
-import * as bcrypt  from 'bcrypt';
+import * as bcrypt from 'bcryptjs'
 
 
 export default class AuthService {
@@ -17,15 +17,19 @@ export default class AuthService {
 
   async genToken(payload: ILogin) {
     const user = await this.userModel.findUser(payload.email)
+
+    if (!user) return null;
     
-    if (!user || !(await bcrypt.compare(user.password, payload.password))) return null;
+    const passwordAuthenticated = bcrypt.compareSync(payload.password, user.password);
+    if (!passwordAuthenticated) return null;
 
-    let { id, username, role, email } = user;
+    const { id, username, role, email } = user;
+    
+    const data: IUser = { id, username, role, email };
+    
+    const token = jwt.sign(data, this._SECRET , this._jwtConfig as jwt.SignOptions);
 
-    const userData: IUser = { id, username, role, email };
-    const token = jwt.sign(userData, this._SECRET , this._jwtConfig as jwt.SignOptions);
-
-    return { user: userData, token };
+    return { user: data, token };
   }
 
   verifyToken(token: string) {

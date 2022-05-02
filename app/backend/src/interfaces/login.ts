@@ -1,3 +1,4 @@
+
 export default interface ILogin {
   email: string;
   password: string;
@@ -9,4 +10,8 @@ export interface IUser {
   role: string;
   email: string;
   password?: string;
+}
+
+export interface IUserEntity {
+  dataValues: IUser;
 }
