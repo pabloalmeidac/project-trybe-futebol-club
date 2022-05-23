@@ -1,3 +1,4 @@
 import ILogin from './login';
+import { IMatchCreate } from './match';
 
-export { ILogin };
+export { ILogin, IMatchCreate };
