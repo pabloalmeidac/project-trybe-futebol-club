@@ -17,6 +17,9 @@ export default class MatchService {
   }
 
   async create(match: IMatchCreate) {
+    if (match.homeTeam === match.awayTeam) {
+      return undefined;
+    }
     const matchCreated = await this.matchModel.create(match);
     return matchCreated;
   }
