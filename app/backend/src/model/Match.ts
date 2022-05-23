@@ -29,4 +29,12 @@ export default class MatchModel {
     const matchCreated = await Matches.create(match)
     return matchCreated;
   }
+
+  async finish(id: number) {
+    const finished = await Matches.update(
+      { inProgress: false },
+      { where: { id }},
+    )
+    return finished;
+  }
 }

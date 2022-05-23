@@ -14,5 +14,6 @@ const matchRouter = Router();
 
 matchRouter.get('/', matchController.list);
 matchRouter.post('/',validateAuth(userModel), matchController.create);
+matchRouter.patch('/:id/finish', matchController.finish);
 
 export default matchRouter;

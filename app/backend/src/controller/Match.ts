@@ -24,4 +24,15 @@ export default class MatchController {
       next(e)
     }
   }
+
+  finish = async (req: Request,res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+
+      await this.matchService.finish(parseInt(id));
+      return res.status(200).json({ message: "Finished" }); 
+    } catch (e) {
+      next(e)
+    }
+  }
 }

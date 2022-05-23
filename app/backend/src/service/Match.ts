@@ -20,4 +20,8 @@ export default class MatchService {
     const matchCreated = await this.matchModel.create(match);
     return matchCreated;
   }
+
+  async finish(id: number) { 
+    await this.matchModel.finish(id);
+  }
 }
