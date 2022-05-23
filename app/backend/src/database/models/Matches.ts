@@ -22,12 +22,12 @@ Matches.init(Attributes.matches,
 
 Matches.belongsTo(Teams, {
   foreignKey: Attributes.matches.homeTeam, 
-  as: 'homeTeam',
+  as: 'teamHome',
 });
 
 Matches.belongsTo(Teams, {
   foreignKey: Attributes.matches.awayTeam, 
-  as: 'awayTeam',
+  as: 'teamAway',
 });
 
 export default Matches;

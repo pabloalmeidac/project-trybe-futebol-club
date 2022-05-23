@@ -5,7 +5,7 @@ export class UserModel {
 
   async findUser(email: string) {
     const user = await Users.findOne({ where: { email } });
-    
+
     return user;
   }
 }

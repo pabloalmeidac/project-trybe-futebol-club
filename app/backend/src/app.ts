@@ -1,7 +1,6 @@
 import * as express from 'express';
 import error from './middleware/error';
-import { loginRouter } from './router';
-import teamRouter from './router/team';
+import { loginRouter, teamRouter, matchRouter } from './router';
 
 class App {
   public app: express.Express;
@@ -20,7 +19,6 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-
     this.app.use(accessControl);
     this.app.use(express.json());
   }
@@ -28,7 +26,7 @@ class App {
   private routes() {
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);
-
+    this.app.use('/matches', matchRouter);
   }
 
   private errorMiddleware() {
@@ -38,7 +36,6 @@ class App {
   public start(PORT: string | number):void {
     this.app.listen(PORT, () => console.warn(`Listening on ${PORT}`));
   }
-  
 }
 
 export { App };
