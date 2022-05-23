@@ -6,21 +6,12 @@ export default class MatchController {
 
   list = async (req: Request,res: Response, next: NextFunction) => {
     try {
-      const matches =  await this.matchService.list();
+      const { inProgress } = req.query;
+
+      const matches =  await this.matchService.list(inProgress);
       return res.status(200).json(matches); 
     } catch (e) {
       next(e)
     }
   }
-
-  /* listById = async (req: Request,res: Response, next: NextFunction) => {
-    try {
-      const { id } = req.params;
-
-      const team =  await this.matchService.listById(Number(id));
-      return res.status(200).json(team); 
-    } catch (e) {
-      next(e)
-    }
-  } */
 }

@@ -10,6 +10,5 @@ const matchController = new MatchController(matchService);
 const matchRouter = Router();
 
 matchRouter.get('/', matchController.list);
-// matchRouter.get('/:id', matchController.listById);
 
 export default matchRouter;
