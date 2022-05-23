@@ -1,3 +1,4 @@
+import { IMatchCreate } from '../interfaces';
 import MatchModel from '../model/Match';
 
 export default class MatchService {
@@ -13,5 +14,10 @@ export default class MatchService {
       matches = await this.matchModel.findAll();
     }
     return matches;
+  }
+
+  async create(match: IMatchCreate) {
+    const matchCreated = await this.matchModel.create(match);
+    return matchCreated;
   }
 }
