@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express"
-import { IMatchCreate } from'../interfaces';
+import { IMatchCreate, IMatchUpdate } from'../interfaces';
 import MatchService from "../service/Match";
 
 export default class MatchController {
@@ -32,6 +32,17 @@ export default class MatchController {
 
       await this.matchService.finish(parseInt(id));
       return res.status(200).json({ message: "Finished" }); 
+    } catch (e) {
+      next(e)
+    }
+  }
+
+  update = async (req: Request,res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      
+      await this.matchService.update(parseInt(id), req.body as IMatchUpdate);
+      return res.status(200).json({ message: "updated" });
     } catch (e) {
       next(e)
     }

@@ -1,4 +1,4 @@
 import ILogin from './login';
-import { IMatchCreate } from './match';
+import { IMatchCreate, IMatchUpdate } from './match';
 
-export { ILogin, IMatchCreate };
+export { ILogin, IMatchCreate, IMatchUpdate };

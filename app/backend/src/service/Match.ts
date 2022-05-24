@@ -1,5 +1,5 @@
 import { TeamModel } from '../model/Team';
-import { IMatchCreate } from '../interfaces';
+import { IMatchCreate, IMatchUpdate } from '../interfaces';
 import MatchModel from '../model/Match';
 
 export default class MatchService {
@@ -45,5 +45,9 @@ export default class MatchService {
 
   async finish(id: number) { 
     await this.matchModel.finish(id);
+  }
+
+  async update(id: number, data: IMatchUpdate) { 
+    await this.matchModel.update(id, data);
   }
 }

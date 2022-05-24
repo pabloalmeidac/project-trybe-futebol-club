@@ -1,4 +1,4 @@
-import { IMatchCreate } from '../interfaces';
+import { IMatchCreate, IMatchUpdate } from '../interfaces';
 import Matches from '../database/models/Matches';
 import Teams from '../database/models/Teams';
 
@@ -36,5 +36,14 @@ export default class MatchModel {
       { where: { id }},
     )
     return finished;
+  }
+
+  async update(id: number, data: IMatchUpdate) {
+    const {awayTeamGoals, homeTeamGoals} = data;
+    const updated = await Matches.update(
+      { awayTeamGoals, homeTeamGoals },
+      { where: { id }},
+    )
+    return updated;
   }
 }
