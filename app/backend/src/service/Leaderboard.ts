@@ -87,4 +87,29 @@ export default class LeaderboardService {
     result.l = 1
     return result;
   }
+
+  classification(homeTeams: ILearderboard[], awayTeams: ILearderboard[]) {
+    const leaderboard = homeTeams;
+    awayTeams.map((teamAway) => {
+      const index = leaderboard.findIndex((team) => team.name === teamAway.name);
+      if(index=== -1) {
+        leaderboard.push(teamAway)
+      } else {
+        leaderboard[index].totalPoints+= teamAway.totalPoints;
+        leaderboard[index].totalGames+= teamAway.totalGames;
+        leaderboard[index].totalVictories+= teamAway.totalVictories;
+        leaderboard[index].totalLosses+= teamAway.totalLosses;
+        leaderboard[index].totalDraws+= teamAway.totalDraws;
+        leaderboard[index].goalsFavor+= teamAway.goalsFavor;
+        leaderboard[index].goalsOwn+= teamAway.goalsOwn;
+        leaderboard[index].goalsBalance+= teamAway.goalsBalance;
+        const j = leaderboard[index].totalGames;
+        const p = leaderboard[index].totalPoints;
+        const efficiency = Number(( p / (j* 3) * 100).toFixed(2));
+        leaderboard[index].efficiency = efficiency;
+      }
+    })
+    const response = this.orderMatches(leaderboard);
+    return response;
+  }
 }

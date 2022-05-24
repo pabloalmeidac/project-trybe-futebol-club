@@ -11,6 +11,7 @@ const leaderboardController = new LeaderboardController(leaderboardService, lead
 
 const leaderboardRouter = Router();
 
+leaderboardRouter.get('/', leaderboardController.list);
 leaderboardRouter.get('/home', leaderboardController.listHome);
 leaderboardRouter.get('/away', leaderboardController.listAway);
 
