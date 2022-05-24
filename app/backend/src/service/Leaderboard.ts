@@ -81,10 +81,10 @@ export default class LeaderboardService {
     }
     
     if(goalsFavor === goalsOwn) {
-       result.l = 1;
+       result.d = 1;
        return result;
     }
-    result.d = 1
+    result.l = 1
     return result;
   }
 }
