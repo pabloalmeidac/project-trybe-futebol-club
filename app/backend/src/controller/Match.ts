@@ -18,11 +18,9 @@ export default class MatchController {
 
   create = async (req: Request,res: Response, next: NextFunction) => {
     try {
-      const match =  await this.matchService.create(req.body as IMatchCreate);
-      if(!match) {
-        return res.status(401).json({ message: "It is not possible to create a match with two equal teams" })
-      }
-      return res.status(201).json(match); 
+      const {status, data} =  await this.matchService.create(req.body as IMatchCreate);
+      
+      return res.status(status).json(data);
     } catch (e) {
       next(e)
     }
